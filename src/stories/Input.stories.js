@@ -1,8 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/vue';
-import { action } from '@storybook/addon-actions';
-import { linkTo } from '@storybook/addon-links';
-
 import Input from '../components/Input.component.vue';
 
 storiesOf('Input', module)
@@ -16,13 +13,13 @@ storiesOf('Input', module)
     render() {
       return (
         <div>
-          <Input name="email" type="email" />
+          <Input name="email" type="email" placeholder="type your email" />
           <br />
-          <Input name="text" />
+          <Input placeholder="text input" />
           <br />
-          <Input name="number" type="number" />
+          <Input name="number" type="number" placeholder="add a number" />
           <br />
-          <Input name="date" type="date" />
+          <Input name="date" type="date" placeholder="select a date" />
         </div>
       );
     }
@@ -35,11 +32,11 @@ storiesOf('Input', module)
           <Input
             name="email"
             type="email"
-            class="error"
+            inputClass="error"
             value="Mario Andretti"
           />
           <br />
-          <Input name="name" class="success" value="Mario Andretti" />
+          <Input name="name" inputClass="success" value="Mario Andretti" />
         </div>
       );
     }
@@ -52,14 +49,16 @@ storiesOf('Input', module)
           <Input
             name="email"
             type="email"
-            class="error"
+            inputClass="error"
             value="Mario Andretti"
             message="Completely messed up input!"
           />
           <br />
+          <i class="fas fa-exclamation" />
+          <br />
           <Input
             name="name"
-            class="success"
+            inputClass="success"
             value="Mario Andretti"
             message="Success message"
           />

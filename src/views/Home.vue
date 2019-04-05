@@ -1,16 +1,19 @@
 <template>
   <div class="container">
     <div class="card">
-      <p>Create exercise</p>
+      <p>
+        Create exercise
+        <i class="fas fa-exclamation"/>
+      </p>
       <form @submit="checkForm">
-        <Input class="test" name="name"/>
-        <Input class="test" name="weight" type="number" min="3"/>
-        <Input class="test" name="reps" type="number" min="0"/>
+        <Input inputClass="success" name="name"/>
+        <Input inputClass="success" name="weight" type="number" min="3"/>
+        <Input inputClass="success" name="reps" type="number" min="0"/>
         <Button type="submit" class="primary">Test</Button>
       </form>
     </div>
     <br>
-    <div class="card" v-for="item in exercises">
+    <div class="card" v-for="item in exercises" :key="item.id">
       Weight: {{item.weight}}
       Reps: {{item.reps}}
       Date: {{item.date | date}}
@@ -19,8 +22,9 @@
       >Delete</button>
     </div>
 
-    <div class="card">Exercises:
-      <p v-for="(value, key) in groupExercises">
+    <div class="card">
+      Exercises:
+      <p v-for="(value, key) in groupExercises" :key="key">
         {{key}}:
         <span>{{displayGroups(value)}}</span>
       </p>

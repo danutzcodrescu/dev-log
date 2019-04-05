@@ -1,25 +1,15 @@
 <template>
   <div>
     <label :for="name">{{name}}</label>
-    <input
-      v-if="type==='text'"
-      :type="type"
-      :name="name"
-      :id="name"
-      :required="required"
-      :value="value"
-    >
-    <input
-      v-else
-      :type="type"
-      :name="name"
-      :id="name"
-      :min="min ? min: false"
-      :max="max ? max : false"
-      :required="required"
-      :value="value"
-    >
-    <p v-if="message">{{message}}</p>
+    <input :class="inputClass" v-if="$attrs.type === undefined" :type="text" v-bind="$attrs">
+    <input v-else v-bind="$attrs" :class="inputClass">
+    <span v-if="inputClass === 'success'" class="icon sucess">
+      <i></i>
+    </span>
+    <span v-else-if="inputClass === 'error'" class="icon error">
+      <i></i>
+    </span>
+    <p v-if="message" :class="inputClass">{{message}}</p>
   </div>
 </template>
 
@@ -28,18 +18,11 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Input extends Vue {
-  @Prop({ type: String, required: true }) private name!: string;
-  @Prop({
-    type: String,
-    default: 'text',
-    validator: value => ['text', 'number', 'date', 'email'].includes(value)
-  })
-  private type!: string;
-  @Prop({ type: String }) private min?: string;
-  @Prop({ type: String }) private max?: string;
-  @Prop({ type: Boolean, default: false }) private required!: boolean;
-  @Prop({ type: String, default: '' }) private value!: string;
-  @Prop({ type: String }) private message!: string;
+  public inheritAttrs = false;
+  @Prop({ type: String, default: '' })
+  private inputClass?: string;
+  @Prop({ type: String })
+  private message?: string;
 }
 </script>
 
@@ -47,10 +30,16 @@ export default class Input extends Vue {
 @import '../styles/_global.config';
 div {
   @extend %font_box;
+  position: relative;
+
+  $text-color: #363636;
+  $hover-color: #b5b5b5;
+  $success-color: #23d160;
+  $error-color: #ff3860;
 
   label {
     text-transform: capitalize;
-    color: #363636;
+    color: $text-color;
     display: block;
     font-size: 1rem;
     font-weight: 600;
@@ -67,36 +56,37 @@ div {
     outline: none;
     background-color: #fff;
     border: 1px solid #dbdbdb;
-    color: #363636;
+    color: $text-color;
     box-shadow: inset 0 1px 2px hsla(0, 0%, 4%, 0.1);
     max-width: 100%;
     width: 100%;
     line-height: 1.5;
     font-size: 1rem;
-    border: 1px solid transparent;
+    // border: 1px solid transparent;
     border-radius: 4px;
     padding: calc(0.375em - 1px) calc(0.625em - 1px);
   }
 
-  // &:not(.error):not(.success) input:active,
-  // &:not(.error):not(.success) input:focus {
-  //   border: 1.25px solid #7957d5;
-  //   box-shadow: 0 0 0 0.125em rgba(121, 87, 213, 0.25);
-  // }
-
-  &:not(.error) input:hover {
-    border: 1px solid #b5b5b5;
+  input:active,
+  input:focus {
+    border: 1.25px solid #7957d5;
+    box-shadow: 0 0 0 0.125em rgba(121, 87, 213, 0.25);
   }
 
-  &.error input {
-    border: 1px solid #ff3860;
+  input:hover {
+    border: 1px solid $hover-color;
+  }
+
+  input.error {
+    border: 1px solid $error-color;
     &:active,
     &:focus {
       box-shadow: 0 0 0 0.125em rgba(255, 56, 96, 0.25);
     }
   }
-  &.success input {
-    border: 1px solid #23d160;
+
+  input.success {
+    border: 1px solid $success-color;
     &:active,
     &:focus {
       box-shadow: 0 0 0 0.125em rgba(35, 209, 96, 0.25);
@@ -108,11 +98,37 @@ div {
     font-size: 0.75rem;
     margin-top: 0.25rem;
   }
-  .success p {
-    color: #23d160;
+  p.success,
+  span.sucess {
+    color: $success-color;
   }
-  .error p {
-    color: #ff3860;
+  p.error,
+  span.error {
+    color: $error-color;
+  }
+
+  span.icon {
+    height: 2.25em;
+    pointer-events: none;
+    position: absolute;
+    top: 3px;
+    width: 2.25em;
+    z-index: 4;
+    right: 0;
+    text-align: center;
+    i:before {
+      display: inline-block;
+      font-style: normal;
+      font-variant: normal;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      font-family: 'Font Awesome 5 Free Solid', 'Font Awesome 5 Free';
+      font-size: 24px;
+      font-weight: 600;
+    }
+    i:before {
+      content: '\f12a';
+    }
   }
 }
 </style>
