@@ -2,7 +2,7 @@
 
 ## Personal remark
 
-Vuejs playground, small component library
+Vuejs playground, SaSS playground, I try to create generic components than can be encapsulated as a small component library.
 
 ## Project setup
 

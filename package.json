@@ -1,7 +1,14 @@
 {
   "name": "dev-log",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "description": "Vuejs and Sass playground around a small project, which also uses the generic components as a component library",
+  "keywords": [
+    "vuejs",
+    "sass",
+    "component library",
+    "storybook"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
