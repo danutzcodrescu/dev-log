@@ -37,6 +37,8 @@ storiesOf('Input', module)
           />
           <br />
           <Input name="name" inputClass="success" value="Mario Andretti" />
+          <br />
+          <Input name="address" value="New York" class="inline" />
         </div>
       );
     }

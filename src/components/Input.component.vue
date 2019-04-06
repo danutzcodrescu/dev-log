@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label :for="name">{{name}}</label>
+    <label :for="$attrs.name">{{$attrs.name}}</label>
     <input :class="inputClass" v-if="$attrs.type === undefined" :type="text" v-bind="$attrs">
     <input v-else v-bind="$attrs" :class="inputClass">
     <!-- <span v-if="inputClass === 'success'" class="icon sucess">
@@ -30,12 +30,28 @@ export default class Input extends Vue {
 @import '../styles/_global.config';
 div {
   @extend %font_box;
-  position: relative;
+  // position: relative;
 
   $text-color: #363636;
   $hover-color: #b5b5b5;
   $success-color: #23d160;
   $error-color: #ff3860;
+
+  &.inline {
+    display: grid;
+    grid-template-columns: 4.2rem 1fr;
+    grid-column-gap: 1rem;
+    align-items: center;
+    justify-items: center;
+
+    label {
+      margin-top: 7px;
+      &:after {
+        content: ':';
+        margin-left: 5px;
+      }
+    }
+  }
 
   label {
     text-transform: capitalize;
