@@ -28,14 +28,10 @@ export default class Input extends Vue {
 
 <style scoped lang="scss">
 @import '../styles/_global.config';
+@import '../styles/_variables';
 div {
   @extend %font_box;
   // position: relative;
-
-  $text-color: #363636;
-  $hover-color: #b5b5b5;
-  $success-color: #23d160;
-  $error-color: #ff3860;
 
   &.inline {
     display: grid;
@@ -57,7 +53,7 @@ div {
     text-transform: capitalize;
     color: $text-color;
     display: block;
-    font-size: 1rem;
+    font-size: $font-size;
     font-weight: 600;
     &:not(:last-child) {
       margin-bottom: 0.5rem;
@@ -70,43 +66,35 @@ div {
 
   input {
     outline: none;
-    background-color: #fff;
-    border: 1px solid #dbdbdb;
+    background-color: $white;
+    border: $white-border;
     color: $text-color;
-    box-shadow: inset 0 1px 2px hsla(0, 0%, 4%, 0.1);
+    box-shadow: $dark-box-shadow;
     max-width: 100%;
     width: 100%;
     line-height: 1.5;
-    font-size: 1rem;
+    font-size: $font-size;
     // border: 1px solid transparent;
-    border-radius: 4px;
-    padding: calc(0.375em - 1px) calc(0.625em - 1px);
+    border-radius: $border-radius;
+    padding: $padding-top-bottom $padding-left-right;
   }
 
   input:active,
   input:focus {
-    border: 1.25px solid #7957d5;
-    box-shadow: 0 0 0 0.125em rgba(121, 87, 213, 0.25);
+    border: $input-border-active;
+    box-shadow: $input-box-shadow-active;
   }
 
   input:hover {
-    border: 1px solid $hover-color;
+    border: $input-border-hover;
   }
 
   input.error {
-    border: 1px solid $error-color;
-    &:active,
-    &:focus {
-      box-shadow: 0 0 0 0.125em rgba(255, 56, 96, 0.25);
-    }
+    @include input($input-border-error, $input-box-shadow-error);
   }
 
   input.success {
-    border: 1px solid $success-color;
-    &:active,
-    &:focus {
-      box-shadow: 0 0 0 0.125em rgba(35, 209, 96, 0.25);
-    }
+    @include input($input-border-success, $input-box-shadow-success);
   }
 
   p {
@@ -114,14 +102,27 @@ div {
     font-size: 0.75rem;
     margin-top: 0.25rem;
   }
-  p.success,
-  span.sucess {
-    color: $success-color;
+
+  $classes: success, error;
+  $colors: (
+    success: $success-color,
+    error: $error-color
+  );
+
+  @each $class in $classes {
+    p.#{$class},
+    span.#{$class} {
+      color: map-get($colors, $class);
+    }
   }
-  p.error,
-  span.error {
-    color: $error-color;
-  }
+  // p.success,
+  // span.sucess {
+  //   color: $success-color;
+  // }
+  // p.error,
+  // span.error {
+  //   color: $error-color;
+  // }
 
   // span.icon {
   //   height: 2.25em;
