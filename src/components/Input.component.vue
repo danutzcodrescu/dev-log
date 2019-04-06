@@ -1,8 +1,14 @@
 <template>
   <div>
     <label :for="$attrs.name">{{$attrs.name}}</label>
-    <input :class="inputClass" v-if="$attrs.type === undefined" :type="text" v-bind="$attrs">
-    <input v-else v-bind="$attrs" :class="inputClass">
+    <input
+      :class="inputClass"
+      v-if="$attrs.type === undefined"
+      type="text"
+      v-bind="$attrs"
+      @input="updateMethod"
+    >
+    <input v-else v-bind="$attrs" :class="inputClass" @input="updateMethod">
     <!-- <span v-if="inputClass === 'success'" class="icon sucess">
       <i></i>
     </span>
@@ -23,6 +29,10 @@ export default class Input extends Vue {
   private inputClass?: string;
   @Prop({ type: String })
   private message?: string;
+
+  public updateMethod(event: any) {
+    this.$emit('input', event.target.value);
+  }
 }
 </script>
 
