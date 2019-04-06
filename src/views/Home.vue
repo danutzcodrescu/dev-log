@@ -5,15 +5,16 @@
         Create exercise
         <i class="fas fa-exclamation"/>
       </p>
-      <form @submit="checkForm">
-        <Input inputClass="success" name="name"/>
-        <Input inputClass="success" name="weight" type="number" min="3"/>
-        <Input inputClass="success" name="reps" type="number" min="0"/>
-        <Button type="submit" class="primary">Test</Button>
+      <form @submit.prevent="submitForm">
+        <Input name="name" v-model="model.name"/>
+        <Input name="weight" type="number" min="0" v-model.number="model.weight"/>
+        <Input name="reps" type="number" min="1" v-model.number="model.reps"/>
+        <Button type="submit" class="info">Test</Button>
       </form>
     </div>
     <br>
     <div class="card" v-for="item in exercises" :key="item.id">
+      Name: {{item.name}}
       Weight: {{item.weight}}
       Reps: {{item.reps}}
       Date: {{item.date | date}}
@@ -58,17 +59,28 @@ Vue.filter('date', (val: Date) => val.toLocaleDateString());
 })
 export default class Home extends Vue {
   public exercises: Exercise[] = [];
-  public checkForm(event: any) {
-    event.preventDefault();
+  public model: { weight: number; reps: number; name: string };
+  private initialValues = {
+    weight: 0,
+    reps: 1,
+    name: ''
+  };
+
+  constructor() {
+    super();
+    this.model = { ...this.initialValues };
+  }
+
+  public submitForm() {
     const elem = {
       id: uuid(),
-      weight: (event.target as any).weight.value,
-      reps: (event.target as any).reps.value,
+      weight: this.model.weight,
+      reps: this.model.reps,
       date: new Date(),
-      name: event.target.name.value
+      name: this.model.name
     };
     this.exercises = [...this.exercises, elem];
-    event.target.reset();
+    this.model = { ...this.initialValues };
   }
 
   public deleteExercise(id: string) {
