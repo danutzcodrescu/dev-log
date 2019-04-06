@@ -3,12 +3,12 @@
     <label :for="name">{{name}}</label>
     <input :class="inputClass" v-if="$attrs.type === undefined" :type="text" v-bind="$attrs">
     <input v-else v-bind="$attrs" :class="inputClass">
-    <span v-if="inputClass === 'success'" class="icon sucess">
+    <!-- <span v-if="inputClass === 'success'" class="icon sucess">
       <i></i>
     </span>
     <span v-else-if="inputClass === 'error'" class="icon error">
       <i></i>
-    </span>
+    </span>-->
     <p v-if="message" :class="inputClass">{{message}}</p>
   </div>
 </template>
@@ -107,29 +107,29 @@ div {
     color: $error-color;
   }
 
-  span.icon {
-    height: 2.25em;
-    pointer-events: none;
-    position: absolute;
-    top: 3px;
-    width: 2.25em;
-    z-index: 4;
-    right: 0;
-    text-align: center;
-    i:before {
-      display: inline-block;
-      font-style: normal;
-      font-variant: normal;
-      text-rendering: auto;
-      -webkit-font-smoothing: antialiased;
-      font-family: 'Font Awesome 5 Free Solid', 'Font Awesome 5 Free';
-      font-size: 24px;
-      font-weight: 600;
-    }
-    i:before {
-      content: '\f12a';
-    }
-  }
+  // span.icon {
+  //   height: 2.25em;
+  //   pointer-events: none;
+  //   position: absolute;
+  //   top: 3px;
+  //   width: 2.25em;
+  //   z-index: 4;
+  //   right: 0;
+  //   text-align: center;
+  //   i:before {
+  //     display: inline-block;
+  //     font-style: normal;
+  //     font-variant: normal;
+  //     text-rendering: auto;
+  //     -webkit-font-smoothing: antialiased;
+  //     font-family: 'Font Awesome 5 Free Solid', 'Font Awesome 5 Free';
+  //     font-size: 24px;
+  //     font-weight: 600;
+  //   }
+  //   i:before {
+  //     content: '\f12a';
+  //   }
+  // }
 }
 </style>
 
