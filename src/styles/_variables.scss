@@ -1,0 +1,47 @@
+$text-color: #363636;
+$hover-color: #b5b5b5;
+$success-color: #23d160;
+$success-color-hover: #22c65b;
+$error-color: #ff3860;
+$error-color-hover: #ff2b56;
+$primary-color: #00d1b2;
+$primary-color-hover: #00c4a7;
+$warning-color: #ffdd57;
+$warning-color-hover: #ffdb4a;
+$info-color: #209cee;
+$info-color-hover: #1496ed;
+$black-transparent: rgba(0, 0, 0, 0.7);
+$border-radius: 4px;
+$border: 1px solid;
+$white: #fff;
+$white-border: $border #dbdbdb;
+$font-size: 1rem;
+$padding-top-bottom: calc(0.375em - 1px);
+$padding-left-right: calc(0.625em - 1px);
+$dark-box-shadow: inset 0 1px 2px hsla(0, 0%, 4%, 0.1);
+$input-box-shadow-active: 0 0 0 0.125em rgba(121, 87, 213, 0.25);
+$input-box-shadow-error: 0 0 0 0.125em rgba(255, 56, 96, 0.25);
+$input-box-shadow-success: 0 0 0 0.125em rgba(35, 209, 96, 0.25);
+$input-border-active: 1.25px solid #7957d5;
+$input-border-error: $border $error-color;
+$input-border-hover: $border $hover-color;
+$input-border-success: $border $success-color;
+
+@mixin button($background-color, $color, $background-hover-color) {
+  background-color: $background-color;
+  border-color: transparent;
+  color: $color;
+  &:hover {
+    background-color: $background-hover-color;
+    border-color: transparent;
+    color: $color;
+  }
+}
+
+@mixin input($border, $box-shadow) {
+  border: $border;
+  &:active,
+  &:focus {
+    box-shadow: $box-shadow;
+  }
+}
