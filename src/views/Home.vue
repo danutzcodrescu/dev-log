@@ -1,9 +1,7 @@
 <template>
   <div>
     <CreateExercise/>
-    <br>
     <ExerciseList/>
-    <br>
     <ExerciseGroup/>
   </div>
 </template>

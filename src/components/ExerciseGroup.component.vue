@@ -1,10 +1,12 @@
 <template>
-  <div class="card" v-if="exercises.length">
-    Exercises:
-    <p v-for="(value, key) in groupExercises" :key="key">
-      {{key}}:
-      <span>{{displayGroups(value)}}</span>
-    </p>
+  <div class="container">
+    <Card v-if="exercises.length">
+      Exercises:
+      <p v-for="(value, key) in groupExercises" :key="key">
+        {{key}}:
+        <span>{{displayGroups(value)}}</span>
+      </p>
+    </Card>
   </div>
 </template>
 
@@ -12,10 +14,12 @@
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import { Exercise, ExerciseState } from '../shared/interfaces';
 import { State } from 'vuex-class';
+import Card from './Card.component.vue';
 
-@Component({})
+@Component({ components: { Card } })
 export default class ExerciseGroup extends Vue {
-  @State((state: ExerciseState) => state.exercises) public exercises!: Exercise[];
+  @State((state: ExerciseState) => state.exercises)
+  public exercises!: Exercise[];
 
   public displayGroups(exercise: string[]) {
     return exercise.join(', ');

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="card">
+    <Card>
       <p>Create exercise</p>
       <form @submit.prevent="submitForm">
         <Input name="name" v-model="model.name"/>
@@ -8,7 +8,7 @@
         <Input name="reps" type="number" min="1" v-model.number="model.reps"/>
         <Button type="submit" class="info">Test</Button>
       </form>
-    </div>
+    </Card>
   </div>
 </template>
 
@@ -19,13 +19,15 @@ import Input from '@/components/Input.component.vue';
 import Button from '@/components/Button.component.vue';
 import uuid from 'uuid/v4';
 import { Exercise } from '../shared/interfaces';
+import Card from './Card.component.vue';
 
 Vue.filter('date', (val: Date) => val.toLocaleDateString());
 
 @Component({
   components: {
     Input,
-    Button
+    Button,
+    Card
   }
 })
 export default class CreateExercise extends Vue {
