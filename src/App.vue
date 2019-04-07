@@ -1,16 +1,45 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <!-- <router-link to="/about">About</router-link> -->
-    </div>
+    <Menu>
+      <template slot="navbar-start">
+        <router-link class="navbar-item nav-link" to="/">Home</router-link>
+      <router-link class="navbar-item nav-link" to="/about">About</router-link>
+      </template>
+       
+    </Menu>
+     
     <router-view/>
   </div>
 </template>
 
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import Menu from '@/components/Menu.component.vue'
+
+@Component(({
+  components: {
+   Menu
+  }
+}))
+export default class App extends Vue {}
+</script>
+
+
 <style lang="scss">
+@import './styles/_variables.scss';
 .container {
   padding: 20px;
+}
+
+.nav-link {
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: $text-color;
+  padding: $padding-top-bottom $padding-left-right;
+  &.router-link-exact-active {
+    background-color: $black-transparent;
+    color: $white;
+  }
 }
 
 .card {
