@@ -14,7 +14,7 @@ export default class Button extends Vue {}
 <style lang="scss" scoped>
 @import '../styles/_variables';
 button {
-  margin: 0.5em 0;
+  margin: 0.5em 0.5em;
   font-size: $font-size;
   border-radius: $border-radius;
   background-color: $white;
